@@ -11,11 +11,11 @@ module.exports = class FFmpeg extends Streamer {
   }
 
   createProcess() {
-    this.process = childProcess.spawn('ffmpeg', this.getArgs(this.kind, this.port, this.filename, this.time));
+    this.process = childProcess.spawn('ffmpeg', this.getArgs(this.kind, this.port, this.filename, this.time, this.hostip));
   }
 
   
-  getArgs(kind, port, filename, time) {
+  getArgs(kind, port, filename, time, hostip) {
     const map = (kind === 'video') ? '0:v:0' : '0:a:0';
     return [
       '-loglevel',
@@ -50,7 +50,7 @@ module.exports = class FFmpeg extends Streamer {
       '-cpu-used', // https://www.webmproject.org/docs/encoder-parameters/
       '2',
       // `[select=v:f=rtp:ssrc=22222222:payload_type=102]rtp://127.0.0.1:${port}`,
-      `[select=a:f=rtp:ssrc=11111111:payload_type=101]rtp://54.255.225.169:${port}`,
+      `[select=a:f=rtp:ssrc=11111111:payload_type=101]rtp://${hostip}:${port}`,
     ];
   }
 

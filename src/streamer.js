@@ -10,7 +10,7 @@ class Streamer {
     this.rtpPort = options.rtpPort;
     this.rtcpPort = options.rtcpPort;
     this.filename = options.filename;
-
+    this.hostip = options.hostip;
     this.process = null;
     this.observer = new EventEmitter();
   }
