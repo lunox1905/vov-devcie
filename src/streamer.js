@@ -43,7 +43,7 @@ class Streamer {
   onData(data) {
     // TODO: parse and fetch the time
     // this.observer.emit('time', time);
-    // console.log('process::data', data);
+    console.log('process::data', data);
   }
 
   /**
