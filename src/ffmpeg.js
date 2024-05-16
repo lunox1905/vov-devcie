@@ -6,7 +6,7 @@ module.exports = class FFmpeg extends Streamer {
     constructor(options) {
         super(options);
 
-        this.time = options.time || '00:00:00.0'; // https://ffmpeg.org/ffmpeg-utils.html#time-duration-syntax
+        this.time = options.time || '00:00:00.0'; 
         this.createProcess();
         this.initListeners();
     }
