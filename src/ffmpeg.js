@@ -12,7 +12,6 @@ module.exports = class FFmpeg extends Streamer {
     }
 
     createProcess() {
-        // console.log("FF::", this.getArgs(this.kind, this.port, this.filename, this.time))
         this.process = childProcess.spawn('ffmpeg', this.getArgs(this.kind, this.port, this.filename, this.time));
     }
     killProcess() {
