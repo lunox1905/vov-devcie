@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+**/*.ts
+**/*.m3u8
 # keys 
 **/*.pem
 # Diagnostic reports (https://nodejs.org/api/report.html)

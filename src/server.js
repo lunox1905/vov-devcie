@@ -17,7 +17,7 @@ async function main() {
     new FFmpeg({
       kind: 'audio',
       port: port,
-      filename: 'files/audio.mp3',
+      filename: '.\\files\\audio.mp3',
     });
 
     socket.emit('recive-producer-audio', { success: true })
