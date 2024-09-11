@@ -6,19 +6,21 @@ module.exports = class FFmpeg extends Streamer {
     constructor(options) {
         super(options);
 
-        this.time = options.time || '00:00:00.0'; 
+        this.time = options.time || '00:00:00.0';
         this.createProcess();
         this.initListeners();
     }
 
     createProcess() {
-        this.process = childProcess.spawn('ffmpeg', this.getArgs(this.kind, this.port, this.filename, this.time));
+        this.process = childProcess.spawn('ffmpeg', this.getArgs(this.kind, this.port, this.filename, this.time, this.ssrc));
     }
     killProcess() {
         console.log("kill")
         kill(this.process.pid)
     }
-    getArgs(kind, port, filename, time, hostip) {
+
+  
+    getArgs(kind, port, hostip) {
         return [
             '-loglevel', 'debug',
 	        '-re',
@@ -31,13 +33,14 @@ module.exports = class FFmpeg extends Streamer {
 	        '-ar', '48000',
 	        '-c:a', 'libopus',
 	        '-f', 'rtp',
-          '-payload_type', '101',
-          '-ssrc', '11111111',
-          `rtp://${hostip}:${port}`,
+            '-payload_type', '101',
+            '-ssrc', '11111111',
+            `rtp://${hostip}:${port}`,
         ];
     }
   
-    // getArgs(kind, port, filename, time) {
+    // getArgs(kind, port, filename, time, ssrc) {
+    //     console.log(ssrc)
     //     const map = (kind === 'video') ? '0:v:0' : '0:a:0';
     //     return [
     //     '-loglevel',
@@ -71,8 +74,8 @@ module.exports = class FFmpeg extends Streamer {
     //     'realtime',
     //     '-cpu-used', // https://www.webmproject.org/docs/encoder-parameters/
     //     '2',
-    //     // `[select=v:f=rtp:ssrc=22222222:payload_type=102]rtp://127.0.0.1:${port}`,
-    //     `[select=a:f=rtp:ssrc=11111111:payload_type=101]rtp://54.179.9.199:${port}`,
+    //     `[select=a:f=rtp:ssrc=11111111:payload_type=101]rtp://127.0.0.1:${port}`
+    //     // `[select=a:f=rtp:ssrc=11111111:payload_type=101]rtp://18.136.103.23:${port}`
     //     ];
     // }
 };
