@@ -9,8 +9,9 @@ class Streamer {
     this.port = options.port;
     this.rtpPort = options.rtpPort;
     this.rtcpPort = options.rtcpPort;
+    this.ssrc = options.ssrc;
     this.filename = options.filename;
-
+    
     this.process = null;
     this.observer = new EventEmitter();
   }
